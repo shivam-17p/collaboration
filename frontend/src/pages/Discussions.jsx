@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { MessageSquare, ThumbsUp, Plus, X, Send, Trash2, Pencil, Check } from 'lucide-react';
 import axios from 'axios';
+import { mediaUrl } from '../utils/api';
 
 export default function Discussions() {
   const [discussions, setDiscussions] = useState([]);
@@ -264,7 +265,7 @@ export default function Discussions() {
 
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid var(--border-color)', paddingTop: '16px' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-light)', fontSize: '14px' }}>
-                  <img src={disc.author?.avatar || `https://api.dicebear.com/7.x/avataaars/svg?seed=${disc.author?.name}`} alt="avatar" style={{ width: 24, height: 24, borderRadius: '50%' }} />
+                  <img src={mediaUrl(disc.author?.avatar) || `https://api.dicebear.com/7.x/avataaars/svg?seed=${disc.author?.name}`} alt="avatar" style={{ width: 24, height: 24, borderRadius: '50%' }} />
                   {disc.author?.name}
                 </div>
                 <div style={{ display: 'flex', gap: '16px' }}>
@@ -290,7 +291,7 @@ export default function Discussions() {
                       <div key={reply._id || idx} style={{ marginBottom: '12px', paddingBottom: '12px', borderBottom: idx !== disc.replies.length - 1 ? '1px solid var(--border-color)' : 'none' }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px', fontSize: '12px', color: 'var(--text-light)', fontWeight: 'bold' }}>
-                            <img src={reply.author?.avatar || `https://api.dicebear.com/7.x/avataaars/svg?seed=${reply.author?.name}`} alt="avatar" style={{ width: 20, height: 20, borderRadius: '50%' }} />
+                            <img src={mediaUrl(reply.author?.avatar) || `https://api.dicebear.com/7.x/avataaars/svg?seed=${reply.author?.name}`} alt="avatar" style={{ width: 20, height: 20, borderRadius: '50%' }} />
                             {reply.author?.name}
                           </div>
                           {/* Edit + Delete reply — author or admin */}

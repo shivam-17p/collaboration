@@ -9,6 +9,7 @@ import axios from 'axios';
 import NoteCard from '../components/NoteCard';
 import EventCardProfile from '../components/EventCardProfile';
 import getCroppedImg from '../utils/cropImage';
+import { mediaUrl } from '../utils/api';
 
 // ─── Tab definitions ─────────────────────────────────────────────
 const TABS = [
@@ -257,7 +258,7 @@ export default function Profile() {
         <div style={{ position: 'relative', cursor: editing ? 'pointer' : 'default' }} onClick={handleAvatarClick}>
           <div style={{ position: 'relative' }}>
             <img
-              src={editing ? formData.avatar : profile.avatar}
+              src={mediaUrl(editing ? formData.avatar : profile.avatar)}
               alt="avatar"
               style={{ width: '100px', height: '100px', borderRadius: '50%', border: '3px solid #eff6ff', objectFit: 'cover', opacity: avatarLoading ? 0.5 : 1 }}
             />

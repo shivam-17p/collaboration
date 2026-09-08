@@ -23,6 +23,7 @@ import {
   Moon
 } from 'lucide-react';
 import axios from 'axios';
+import { mediaUrl } from '../utils/api';
 import '../index.css';
 
 export default function Layout({ children, onSearch, userInfo, setUserInfo }) {
@@ -276,7 +277,7 @@ export default function Layout({ children, onSearch, userInfo, setUserInfo }) {
             </div>
             
             <div className="user-profile" onClick={() => navigate('/profile')}>
-              <img src={userInfo?.avatar || `https://api.dicebear.com/7.x/avataaars/svg?seed=${userInfo?.name || 'User'}`} alt="User Avatar" className="avatar" />
+              <img src={mediaUrl(userInfo?.avatar) || `https://api.dicebear.com/7.x/avataaars/svg?seed=${userInfo?.name || 'User'}`} alt="User Avatar" className="avatar" />
               <div className="user-info">
                 <span className="user-name">{userInfo?.name || 'Student'}</span>
                 <span className="user-role">{userInfo?.department || 'Student'}</span>

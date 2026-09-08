@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { User, Download, ThumbsUp, Trash2, Bookmark, BookmarkCheck, ExternalLink } from 'lucide-react';
 import { SUBJECT_COLORS } from '../data/mockData';
 import axios from 'axios';
+import { mediaUrl } from '../utils/api';
 
 export default function NoteCard({ note, currentUser, onDelete, showSave = false, isSaved = false, onSaveToggle, downloadDate }) {
   const [upvotes, setUpvotes] = useState(note.upvotes || 0);
@@ -12,7 +13,7 @@ export default function NoteCard({ note, currentUser, onDelete, showSave = false
 
   const handleDownload = async () => {
     if (note.fileUrl && note.fileUrl !== '#') {
-      window.open(note.fileUrl, '_blank');
+      window.open(mediaUrl(note.fileUrl), '_blank');
     } else {
       alert(`Downloading ${note.title}...`);
     }
@@ -138,7 +139,7 @@ export default function NoteCard({ note, currentUser, onDelete, showSave = false
         </button>
         {note.fileUrl && note.fileUrl !== '#' && (
           <button
-            onClick={() => window.open(note.fileUrl, '_blank')}
+            onClick={() => window.open(mediaUrl(note.fileUrl), '_blank')}
             style={{ padding: '8px 12px', borderRadius: '8px', border: '1px solid var(--border-color)', background: 'var(--bg-surface)', cursor: 'pointer', display: 'flex', alignItems: 'center', color: 'var(--text-primary)' }}
             title="Quick Open"
           >
