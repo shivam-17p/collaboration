@@ -3,6 +3,7 @@ const dotenv = require('dotenv');
 const cors = require('cors');
 const morgan = require('morgan');
 const path = require('path');
+const cron = require('node-cron');
 const connectDB = require('./config/db');
 
 // Load env vars
@@ -34,6 +35,21 @@ app.use('/api/dashboard', require('./routes/dashboardRoutes'));
 
 app.get('/', (req, res) => {
   res.send('API is running...');
+});
+
+app.get('/health', (req, res) => {
+  res.status(200).json({ status: 'ok' });
+});
+
+const backendUrl = process.env.BACKEND_URL || `http://localhost:${process.env.PORT || 5000}`;
+
+cron.schedule('*/5 * * * *', async () => {
+  try {
+    const response = await fetch(`${backendUrl}/health`);
+    console.log(`Health ping: ${response.status}`);
+  } catch (error) {
+    console.error(`Health ping failed: ${error.message}`);
+  }
 });
 
 const PORT = process.env.PORT || 5000;
